@@ -5,7 +5,8 @@ const CreateForm = ({ onSubmit }) => {
     const [formData, setFormData] = useState({
         name: "",
         color: "",
-        icon: ""
+        icon: "",
+        type: "EXPENSE"
     });
 
     const handleChange = (e) => {
@@ -19,7 +20,8 @@ const CreateForm = ({ onSubmit }) => {
         setFormData({
             name: "",
             color: "",
-            icon: ""
+            icon: "",
+            type: "EXPENSE"
         });
     };
 
@@ -36,6 +38,13 @@ const CreateForm = ({ onSubmit }) => {
             <div>
                 <label htmlFor="icon">Icon</label>
                 <input type="text" name="icon" value={formData.icon} onChange={handleChange} required />
+            </div>
+            <div>
+                <label htmlFor="type">Type</label>
+                <select id="type" name="type" value={formData.type} onChange={handleChange} required>
+                    <option value="EXPENSE">Expense</option>
+                    <option value="INCOME">Income</option>
+                </select>
             </div>
             <button type="submit">Create</button>
         </form>
