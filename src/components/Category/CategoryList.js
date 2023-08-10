@@ -1,4 +1,7 @@
+// CategoryList.js
+
 import React, { useState } from 'react';
+import './CategoryList.css'; // Import the CSS file
 
 const CategoryList = ({ categories, onUpdate, onDelete }) => {
   const [editedCategory, setEditedCategory] = useState(null);
@@ -25,13 +28,13 @@ const CategoryList = ({ categories, onUpdate, onDelete }) => {
   };
 
   return (
-    <div>
-      <h2>Categories:</h2>
+    <div className="category-list">
+      <h2>Categories</h2>
       <ul>
         {categories.map((category) => (
-          <li key={category.id}>
+          <li key={category.id} className="category-item">
             {editedCategory && editedCategory.id === category.id ? (
-              <div>
+              <div className="edit-form">
                 <input
                   type="text"
                   name="name"
@@ -50,18 +53,42 @@ const CategoryList = ({ categories, onUpdate, onDelete }) => {
                   value={editedCategory.icon}
                   onChange={handleChange}
                 />
-                <select name="type" value={editedCategory.type} onChange={handleChange}>
+                <select
+                  name="type"
+                  value={editedCategory.type}
+                  onChange={handleChange}
+                >
                   <option value="EXPENSE">Expense</option>
                   <option value="INCOME">Income</option>
                 </select>
-                <button onClick={handleUpdate}>Save</button>
-                <button onClick={handleCancel}>Cancel</button>
+                <button
+                  className="button button-primary"
+                  onClick={handleUpdate}
+                >
+                  Save
+                </button>
+                <button
+                  className="button button-secondary"
+                  onClick={handleCancel}
+                >
+                  Cancel
+                </button>
               </div>
             ) : (
               <div>
                 <strong>{category.name}</strong> - Color: {category.color}, Icon: {category.icon}, Type: {category.type}
-                <button onClick={() => handleEdit(category)}>Edit</button>
-                <button onClick={() => onDelete(category.id)}>Delete</button>
+                <button
+                  className="button button-primary"
+                  onClick={() => handleEdit(category)}
+                >
+                  Edit
+                </button>
+                <button
+                  className="button button-secondary"
+                  onClick={() => onDelete(category.id)}
+                >
+                  Delete
+                </button>
               </div>
             )}
           </li>

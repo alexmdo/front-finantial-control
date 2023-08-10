@@ -6,6 +6,7 @@ import CreateForm from "./CreateForm";
 
 const CategoryForm = () => {
   const [categories, setCategories] = useState([]);
+  const [message, setMessage] = useState(null);
 
   useEffect(() => {
     fetchCategories();
@@ -21,6 +22,7 @@ const CategoryForm = () => {
       setCategories(response.data.content);
     } catch (error) {
       console.log('Error fetching categories:', error);
+      setMessage(`Error fetching categories: ${error.response.data.message}`);
     }
   };
 
@@ -32,8 +34,10 @@ const CategoryForm = () => {
         }
       });
       fetchCategories();
+      setMessage('Category created successfully');
     } catch (error) {
       console.log('Error creating category:', error);
+      setMessage(`Error creating category: ${error.response.data.message}`);
     }
   };
 
@@ -45,8 +49,10 @@ const CategoryForm = () => {
         }
       });
       fetchCategories();
+      setMessage('Category updated successfully');
     } catch (error) {
       console.log('Error updating category:', error);
+      setMessage(`Error updating category: ${error.response.data.message}`);
     }
   };
 
@@ -58,13 +64,16 @@ const CategoryForm = () => {
         }
       });
       fetchCategories();
+      setMessage('Category deleted successfully');
     } catch (error) {
       console.log('Error deleting category:', error);
+      setMessage(`Error deleting category: ${error.response.data.message}`);
     }
   };
 
   return (
     <div>
+      {message && <div>{message}</div>}
       <h1>Category Register</h1>
       <CreateForm onSubmit={createCategory} />
       <CategoryList categories={categories} onUpdate={updateCategory} onDelete={deleteCategory} />

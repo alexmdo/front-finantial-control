@@ -1,22 +1,22 @@
 import './App.css';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import LoginForm from './components/LoginForm';
-import CategoryForm from './components/Category/CategoryForm';
+import React from "react";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import LoginForm from "./components/LoginForm";
+import CategoryForm from "./components/Category/CategoryForm";
+import LandingPage from "./components/LandingPage/LandingPage"; 
 
 function App() {
-
-
   return (
     <Router>
       <div>
         <Routes>
-          <Route path="/" Component={LoginForm} />
-          <Route path='/categories' Component={CategoryForm} />
+          <Route path="/" element={<LandingPage />} /> 
+          <Route path="/login" element={<LoginForm />} />
+          <Route path="/categories" element={<CategoryForm />} />
         </Routes>
       </div>
     </Router>
   );
-
 }
 
 export default App;
